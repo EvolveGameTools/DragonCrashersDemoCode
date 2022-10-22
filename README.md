@@ -28,3 +28,16 @@ If you aren't using the Rider plugin, the easiest way to view the files is to op
 While there isn't a VS Code plugin for EvolveUI yet, you can associate `.ui` and `.style` files with C# for somewhat reasonable (but not 100% correct) highlighting. 
 
 Once VS Code is open, press `Ctrl+Shift+P` and type "change language mode" with a `.ui` or `.style` file open and select `C#`. You will need to do this twice, once for `.ui` files and once for `.style` files
+
+## Documentation
+
+EvolveUI's documentation site can be found [here](https://evolvegametools.github.io/EvolveUIDocs/docs/templates/template_syntax). It's not complete and certainly not polished but may still be helpful to browse. Here are some of the more interesting links to check out:
+
+- [Template Syntax](https://evolvegametools.github.io/EvolveUIDocs/docs/templates/template_syntax)
+- [Style Syntax](https://evolvegametools.github.io/EvolveUIDocs/docs/templates/style_syntax)
+- [Style Queries](https://evolvegametools.github.io/EvolveUIDocs/docs/templates/style_queries)
+- [Style Properties](https://evolvegametools.github.io/EvolveUIDocs/docs/styles/style_properties_generated)
+- [Style Types](https://evolvegametools.github.io/EvolveUIDocs/docs/styles/style_types_generated)
+
+
+
