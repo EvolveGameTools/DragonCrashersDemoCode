@@ -23,7 +23,7 @@ If you want to open the files in Rider you can download the EvolveUI plugin [her
 The Rider plugin has features such as go-to-reference, code completion, refactoring, and a lot more. 
 
 #### VS Code
-Otherwise the easiest way to view the files is to open this repo in the Visual Studio Code for github site [(click here)](https://github1s.com/EvolveGameTools/DragonCrashersDemoCode/blob/master/UI/App.ui)
+If you aren't using the Rider plugin, the easiest way to view the files is to open this repo in the Visual Studio Code for github site [(click here)](https://github1s.com/EvolveGameTools/DragonCrashersDemoCode/blob/master/UI/App.ui)
 
 While there isn't a VS Code plugin for EvolveUI yet, you can associate `.ui` and `.style` files with C# for somewhat reasonable (but not 100% correct) highlighting. 
 
