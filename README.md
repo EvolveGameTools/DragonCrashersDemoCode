@@ -19,7 +19,7 @@ I would recommend having a look at the following files:
 ## Highlighting
 
 #### Rider
-If you want to open the files in Rider you can download the EvolveUI plugin [here](https://drive.google.com/file/d/1HeBR_udYp4gYaLhWQtUAavpJ4-CNEomQ/view?usp=sharing). You can then drag & drop the zip file into any Rider window, restart Rider, and you're good to go. 
+If you want to open the files in Rider you can download the EvolveUI plugin [here](https://drive.google.com/uc?id=1HeBR_udYp4gYaLhWQtUAavpJ4-CNEomQ&export=download). You can then drag & drop the zip file into any Rider window, restart Rider, and you're good to go. 
 The Rider plugin has features such as go-to-reference, code completion, refactoring, and a lot more. 
 
 #### VS Code
