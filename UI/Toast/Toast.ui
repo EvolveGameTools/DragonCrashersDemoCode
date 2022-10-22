@@ -1,0 +1,5 @@
+template ToastMessage : ToastElement {
+        
+    Text(toast.message, style = [@toast-label]);
+    
+}

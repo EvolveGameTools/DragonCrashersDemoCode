@@ -1,0 +1,31 @@
+﻿style <Icon8> {
+    PreferredSize = 8px;
+}
+
+style <Icon16> {
+    PreferredSize = 16px;
+}
+
+style <Icon24> {
+    PreferredSize = 24px;
+}
+
+style <Icon32> {
+    PreferredSize = 32px;
+}
+
+style <Icon64> {
+    PreferredSize = 64px;
+}
+
+style <Icon96> {
+    PreferredSize = 96px;
+}
+
+style <Icon128> {
+    PreferredSize = 128px;
+}
+
+style <Icon256> {
+    PreferredSize = 256px;
+}

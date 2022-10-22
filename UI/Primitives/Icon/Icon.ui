@@ -1,0 +1,20 @@
+﻿
+// define a bunch of helper templates for displaying icons at fixed sizes
+
+container Icon : Icon();
+
+container Icon8 : Icon();
+
+container Icon16 : Icon();
+
+container Icon24: Icon();
+
+container Icon32: Icon();
+
+container Icon64: Icon();
+
+container Icon96: Icon();
+
+container Icon128: Icon();
+
+container Icon256: Icon();

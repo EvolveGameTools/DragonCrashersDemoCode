@@ -1,0 +1,96 @@
+﻿using System.Collections.Generic;
+
+element InventoryOverlay {
+    int gearSlot;
+    bool isOpen;
+    List<EquipmentSO> inventory;
+}
+
+template InventoryOverlay : element InventoryOverlay {
+
+    Div(style = [@inventory-frame]) {
+        
+        Text("Gear Inventory", style = [@inventory-title]);
+
+        // initialize default state for our inventory filters
+        state Rarity selectedRarity = Rarity.All;
+        state EquipmentType selectedEquipmentType = EquipmentType.All;
+        
+        state GameData gameData = $runtime.GetService<GameData>();
+
+        // define a function that will decide if we show a given item or not based on our current filter settings
+        bool FilterItem(EquipmentSO item) {
+            if(selectedRarity != Rarity.All && selectedRarity != item.rarity) {
+                return false;
+            }
+            if(selectedEquipmentType != EquipmentType.All && selectedEquipmentType != item.equipmentType) {
+                return false;
+            }
+            return true;
+        }
+        
+        Div(style = [@inventory-body]){
+            
+            // create two dropdown option lists, one for rarity and one for equipment type
+            state DropdownOptions<Rarity> rarityOptions = new DropdownOptions<Rarity>();
+            state DropdownOptions<EquipmentType> equipmentOptions = new DropdownOptions<EquipmentType>();
+
+            // shove some data into these lists when we first enter this scope
+            create {
+                rarityOptions.Add(Rarity.All);
+                rarityOptions.Add(Rarity.Common);
+                rarityOptions.Add(Rarity.Rare);
+                rarityOptions.Add(Rarity.Special);
+                
+                equipmentOptions.Add(EquipmentType.All);
+                equipmentOptions.Add(EquipmentType.Weapon);
+                equipmentOptions.Add(EquipmentType.Helmet);
+                equipmentOptions.Add(EquipmentType.Boots);
+                equipmentOptions.Add(EquipmentType.Gloves);
+                equipmentOptions.Add(EquipmentType.Shield);
+                equipmentOptions.Add(EquipmentType.Accessories);
+            }
+            
+            Horizontal(style = [@inventory-filter-row]) {
+            
+                Horizontal(style = [@inventory-filter]) {
+                    
+                    Icon(`icon_sorting`, size = `48px`);
+                    
+                    // render the dropdown with the rarityOptions and sync the selectedRarity to the selectedValue of the dropdown 
+                    Dropdown<Rarity>(rarityOptions, sync:selectedValue = selectedRarity);
+                    
+                }
+                    
+                Horizontal(style = [@inventory-filter]) {
+                    
+                    Icon(`icon_filter`, size = `48px`);
+                    
+                    // render the dropdown with the equipmentOptions and sync the selectedEquipmentType to the selectedValue of the dropdown
+                    Dropdown<EquipmentType>(equipmentOptions, sync:selectedValue = selectedEquipmentType);
+                    
+                }
+            
+            }
+
+            state IconService iconService = $runtime.GetService<IconService>();
+            
+            Horizontal(style = [@inventory-list]) {
+                // foreach item in the inventory list, run it through the filter function and if it passes
+                // we render an icon that when clicked will close the inventory overlay and equip the item into 'gearSlot'
+                // on the current character 
+                foreach(item in inventory) { 
+                    if(FilterItem(item)){
+                        Icon(iconService.GetIcon(item.iconPath), size = `100px`, style = [@inventory-item], mouse:click = () => {
+                            gameData.CurrentCharacter.Equip(gearSlot, item);
+                            isOpen = false;
+                        });
+                    }
+                }
+            }
+            
+        }
+        
+    }
+        
+}

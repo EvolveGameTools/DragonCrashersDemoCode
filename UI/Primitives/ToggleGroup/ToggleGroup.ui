@@ -1,0 +1,42 @@
+﻿using UI;
+
+element ToggleGroup {
+    implicit int selectedIndex;
+    UIElement selectedElement;
+}
+
+// this template behaves almost identically to the @ToggleGroup decorator and is here to show 
+// that the desired behavior can be achieved either with decorators or with templates 
+// see ToggleGroup.cs for explaination on how this uses the context tree to manage scope
+template ToggleGroup : element ToggleGroup {
+
+    // define an unamed slot that will accept all children from the usage site like this:
+    // ToggleGroup() {
+    //     everything in here gets captures into the implicit slot
+    //     and we can choose if/when/where to render it inside the ToggleGroup template
+    // } 
+    define slot implicit();
+    
+    state ToggleController controller = new ToggleController();
+    
+    create {
+        controller.onSelected = (UIElement el, int index) => {
+            selectedElement = el;
+            selectedIndex = index;
+        };
+    }    
+
+    run {
+        $runtime.PushContext<ToggleController>(controller);
+        controller.Setup(selectedIndex);
+    }
+
+    // render the captured child block 
+    render slot implicit();
+
+    run {
+        selectedIndex = controller.selectedIndex; 
+        $runtime.PopContext<ToggleController>();
+    }
+
+}

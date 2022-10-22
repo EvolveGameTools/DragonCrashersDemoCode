@@ -1,0 +1,20 @@
+﻿typography CurrencyText;
+
+element CurrencyBar {
+    int amount;
+    ScreenId targetScreen;
+    ImageSource icon;
+}
+
+template CurrencyBar : element CurrencyBar {
+    
+    Div(style = [@currency-icon], style:BackgroundImage = icon);            
+    
+    CurrencyText(amount);
+    
+    Div(style = [@add-currency], mouse:click = () => {
+        $runtime.GetService<GameData>().currentScreen = targetScreen;
+    });
+    
+          
+}

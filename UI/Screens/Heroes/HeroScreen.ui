@@ -1,0 +1,183 @@
+// we want to use some elements & styles defined in a different module so we need to import that
+import implicit "BasicElements"; 
+
+using System.Collections.Generic;
+
+// 'container' is like a template without a body, it lets us given formal 
+// names to elements and style them with <TagName> syntax. We can also add decorators,
+// backing types, life cycle handlers and styles. In this particular app we mostly use 
+// these as named element aliases however. 
+@ToggleControl
+container CharacterTab;
+container GearRow;
+container HeroGearRow;
+container CharaterNavButton;
+
+typography CharacterTabLabel;
+
+template HeroScreen {
+    
+    // mark which gear slot we are currently equipping. -1 indicates we are't currently equipping. 
+    state int equippingGearSlot = -1;
+    state GameData gameData = $runtime.GetService<GameData>();
+    state IconService iconService = $runtime.GetService<IconService>();
+
+    // populate our inventory from EquipmentSO scriptable objects loaded out of resources
+    state List<EquipmentSO> inventory = new List<EquipmentSO>();
+    create {
+        inventory.AddRange(Resources.LoadAll<EquipmentSO>("GameData/Equipment"));
+    } 
+
+    // local variable to store which character is currently selected
+    // because there is not 'state' keyword here, this is re-executed every frame
+    CharacterBaseSO character = gameData.CurrentCharacter;
+    
+    Group(style = [@character-gear-container]) {
+        
+        // top center section w/ character name & power read out
+        Vertical(attr:stretch_h, style = [@padding-center-horizontal]) {
+            Banner(character.characterName, style = [@character-name-banner]);
+            
+            Horizontal(style = [@power-row]) {
+                Div(style = [@power-icon]);
+                Text(character.basePointsAttack, style = [@power-text]);
+            }
+        }
+        
+        // this is the center section with the four gear slots 
+        Vertical(style = [@hero-gear-area]) {
+
+            // each gear slow accepts which item reference it should show and set's the gear slot index
+            // that is being equipped when we click it. Setting this slot index will trigger the opening of 
+            // the inventory overlay.         
+            HeroGearRow() {
+                GearSlot(character.equippedItems[0], mouse:click = () => equippingGearSlot = 0);
+                GearSlot(character.equippedItems[1], mouse:click = () => equippingGearSlot = 1);
+            }
+            
+            HeroGearRow() {
+                GearSlot(character.equippedItems[2], mouse:click = () => equippingGearSlot = 2);
+                GearSlot(character.equippedItems[3], mouse:click = () => equippingGearSlot = 3);
+            }
+           
+        }
+        
+        bool isOpen = equippingGearSlot >= 0;
+        if(isOpen) {
+            
+            // teleport lets us define templates & data in this lexical scope but render it somewhere else entirely. 
+            // In this particular case we want to show the inventory overlay and poss in our 'isOpen' value, the list 
+            // of items available in the inventory, and the current slot we are equipping for. This entire template
+            // is rendered in a portal called 'Overlay' which is defined in OverlayModal.ui
+            teleport->("Overlay") {
+                InventoryOverlay(sync:isOpen = isOpen, inventory = inventory, gearSlot = equippingGearSlot);
+                // if the inventory template was closed we reset the equippingGearSlot back to -1 
+                run equippingGearSlot = isOpen ? equippingGearSlot : - 1; 
+            }         
+                   
+        }
+             
+        // these are the buttons which let us toggle through the displayed character 
+        // since `gameDdata` is the source of truth of which character is shown
+        // we just invoke the Prev/Next Character functions on that object 
+        HeroGearRow() {
+            CharaterNavButton(mouse:click = gameData.PrevCharacter(), attr:large);
+            CharaterNavButton(mouse:click = gameData.NextCharacter(), attr:large);
+        }
+        
+        // this is the bottom button row where we can hit the level up button and auto equip/remove the gear 
+        Horizontal(style = [@hero-button-row]) {
+            Button("Auto-equip", attr:grey, mouse:click = () => character.AutoEquip(inventory));
+            
+            Vertical(style = [@potion-row]) {
+                Horizontal(style = [@xp-row]) {
+                    Div(style = [@xp-icon]);
+                    Text($"{character.currentXP}/{character.xpToNextLevel}", style = [@xp-text]);
+                }
+                Button("Level up", attr:primary, style = [@xp-button], mouse:click = () {
+                    // if we click the level up button but don't have enough xp to level up, 
+                    // we show a toast message that disappears after 1000ms 
+                    // if the level up was successful, the next frame rendered will show the new data automatically
+                    if(!character.LevelUp()) {
+                        $runtime.GetService<ToastService>().AddToast("Not enough XP to level up", 1000);
+                    }
+                });
+            }
+            
+            Button("Unequip", attr:grey, mouse:click = () => character.UnequipAll());
+        }
+        
+    }
+    
+    // this is the panel on the right hand side showing the stats, skills, and bio tabs
+    Group(style = [@character-data-container]) {
+        state int selectedTab = 0;
+        
+        Div(style = [@character-panel-frame]) {
+        
+            // use a toggle group to figure out which contents to show
+            @ToggleGroup(selectedIndex = selectedTab) [selectedIndex] 
+            Div(style = [@character-tabs]) {
+            
+                CharacterTab() {
+                    CharacterTabLabel("Stats");
+                }
+                
+                CharacterTab() {
+                    CharacterTabLabel("Skills");
+                }
+                
+                CharacterTab() {
+                    CharacterTabLabel("Bio");
+                }
+                
+            }
+            
+            // sync our local tab state to the index extruded out of the ToggleGroup
+            // decorators do not (yet) support sync so this unfortunately 
+            // needs to be done manually for the moment 
+            run selectedTab = selectedIndex;
+                                    
+            // switch over the selected tab to show the right data panel                                     
+            Div(style = [@tab-content]) {
+                switch(selectedTab) {
+                    // stats
+                    case 0 {
+                    
+                        Text($"Level {character.level}", style = [@level-label]);
+                        
+                        // use the iconService to figure out which icons to show based on characterClass, rarity, and attackType
+                        // which icon to show is defined per-character in the game data that we read in from scriptable objects
+                        Horizontal(style = [@badge-list]) {
+                            Badge(label = character.characterClass, icon = iconService.GetIcon(character.characterClass));
+                            Badge(label = character.rarity, icon = iconService.GetIcon(character.rarity));
+                            Badge(label = character.attackType, icon = iconService.GetIcon(character.attackType));
+                        }
+                        
+                        // when the icon to display is always known at compile time we can just load it by name with backticks
+                        Div(style = [@stat-frame]) {
+                            CharacterStat(icon = `icon_stat_health`, value = character.basePointsLife);
+                            CharacterStat(icon = `icon_stat_defense`, value = character.basePointsDefense);
+                            CharacterStat(icon = `icon_stat_attack`, value = character.basePointsAttack);
+                            CharacterStat(icon = `icon_stat_speed`, value = character.basePointsAttackSpeed);
+                            CharacterStat(icon = `icon_stat_ultimate`, value = character.basePointsSpecialAttack);
+                            CharacterStat(icon = `icon_stat_critical`, value = character.basePointsCriticalHit);
+                        }
+                    }
+                    
+                    // skills
+                    case 1 {
+                        SkillSection();
+                    }
+                    
+                    // bio
+                    case 2 {
+                        BioSection();
+                    }
+                }
+            }
+        }
+    }
+    
+}
+

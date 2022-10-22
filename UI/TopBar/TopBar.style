@@ -1,0 +1,28 @@
+﻿style <TopBar> {
+    LayoutType = Horizontal;
+    SpaceBetweenHorizontal = 4px;
+    LayoutBehavior = Ignored; // this element should not be considered a child of it's parent for layout purposes 
+               
+    ZIndex = 2; // the top bar needs to overlay on top of the main UI so we offset it's z index
+
+    Margin = 4px;
+    MarginLeft = 1s;
+    Padding = 1s;
+}
+
+style settings-container {
+    
+    PreferredSize = 86px;
+    BackgroundColor = opacity(black, 60%);
+    CornerRadius = 12px;
+    transition spring(stiff) = RenderTransform;
+    
+    [hover] {
+        RenderTransform = Scale(1.2);
+    }
+}
+
+style settings-icon {
+    BackgroundImage = "icon_settings";
+    PreferredSize = 1s;
+}

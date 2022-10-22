@@ -1,0 +1,19 @@
+﻿element GearSlot {
+    implicit EquipmentSO item;
+}
+
+template GearSlot : element GearSlot {
+
+    // decide if we show the empty state or the filled state
+    // for the filled state we'll show the appropriate icon based on the equipped item
+    if(item != null) {
+        state IconService iconService = $runtime.GetService<IconService>();
+        Div(style = [@filled-gear-slot], style:BackgroundImage = iconService.GetIcon(item.iconPath));
+    }
+    else {
+        Div(style = [@empty-gear-slot]){
+            Div(style = [@empty-gear-slot-inner]);
+        }
+    }
+    
+}

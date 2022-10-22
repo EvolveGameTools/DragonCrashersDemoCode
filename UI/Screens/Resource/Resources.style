@@ -1,0 +1,71 @@
+style <Resources> {
+    PreferredSize = 10s 6s;
+    Margin = 1s;
+}
+
+style resource-body {
+    BackgroundImage = "Window_bg_02";
+    PreferredSize = 1s;
+    PaddingHorizontal = 64px;
+}
+
+style title-banner {
+    MarginHorizontal = 1s;
+    MarginTop = 4px;
+    PreferredWidth = 50%;
+    PreferredHeight = 106px;
+    MarginBottom = 32px;
+}
+
+style resource-content {
+    PreferredSize = 1s 1cnt;
+    PaddingVertical = 1s;
+    LayoutType = Horizontal;
+}
+
+style resource-ebook {
+    PreferredWidth = 60%;
+    PreferredHeight = 1s;
+    AspectRatio = ImageAspect;
+    BackgroundImage = "EBookGraphicTemp";
+}
+
+style resources-cta-label {
+    TextColor = @labelColorDark;
+    TextFontSize = 40px;
+    TextAlignment = Center;
+    PreferredWidth = 2s;
+}
+
+style resources-cta {
+    PreferredWidth = 2s;
+    PaddingHorizontal = 1s;
+    SpaceBetweenVertical = 32px;
+}
+
+style cta-text-continer {
+    PreferredWidth = 320px;
+}
+
+style separator-label {
+    TextFontSize = 40px;
+    TextColor = @labelColorDark;
+    LayoutBehavior = Ignored;
+    AlignmentTarget = Parent;
+    AlignmentOffsetX = 0.5pw;
+    AlignmentOriginX = -0.5w;
+    AlignmentOffsetY = 0.5ph;
+    AlignmentOriginY = -0.5h;
+    BackgroundColor = #d2bf87;
+    Padding = 12px;
+}
+
+style resource-separator {
+    MarginVertical = 32px;
+}
+
+style button-row {
+    PreferredWidth = 1s;
+    PaddingHorizontal = 1s;
+    SpaceBetweenHorizontal = 16px;
+}

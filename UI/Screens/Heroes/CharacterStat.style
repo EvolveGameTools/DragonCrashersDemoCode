@@ -1,0 +1,11 @@
+﻿style <CharacterStat> {
+    LayoutType = Horizontal;
+    Padding = 1s;
+    PreferredSize = 1s;
+    SpaceBetweenHorizontal = 1s;
+}
+
+style character-stat-text {
+    TextColor = @labelColorDark;
+    TextFontSize = 55px;
+}

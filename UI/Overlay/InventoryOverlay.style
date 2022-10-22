@@ -1,0 +1,59 @@
+﻿style <InventoryOverlay> {
+    PointerEvents = Normal;
+    PreferredSize = 1vw 1vh;
+    ZIndex = 1;
+    BackgroundColor = opacity(black, 60%);
+}
+
+style inventory-frame {
+     BackgroundImage = "Window_bg_03";
+     PreferredSize = 800px 1cnt;
+     MarginHorizontal = 1s;
+     MarginVertical = 1s;
+     [init] {
+         RenderTransform = scale(0.1);
+     }
+     RenderTransform = scale(1);
+     transition spring(default) = RenderTransform;
+}
+
+style inventory-title {
+    TextColor = #c5c5c5;
+    TextFontSize = 64px;
+    MarginHorizontal = 1s;
+    MarginTop = 16px;
+    MarginBottom = 8px;
+}
+
+style inventory-body {
+     BackgroundImage = "Window_bg_04";
+     PreferredSize = 1s 1strcnt;
+     MarginHorizontal = 16px;
+     MarginBottom = 16px;
+}
+
+style inventory-filter-row {
+    PreferredWidth = 1s;
+    PaddingVertical = 16px;
+    PaddingHorizontal = 1s;
+    SpaceBetweenHorizontal = 32px;
+}
+
+style inventory-filter {
+    SpaceBetweenHorizontal = 8px;
+}
+
+style inventory-list {
+    PreferredWidth = 1s;
+    LayoutType = HorizontalWrap;
+    PaddingHorizontal = 32px;
+    PaddingBottom = 16px;
+    SpaceBetween = 16px;
+}
+
+style inventory-item {
+    transition spring(wobbly) = RenderTransform;
+    [hover] {
+        RenderTransform = scale(1.1);
+    }
+}

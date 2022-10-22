@@ -1,0 +1,10 @@
+﻿
+element CharacterStat {
+    ImageSource icon;
+    string value;   
+}
+
+template CharacterStat : element CharacterStat {
+    Icon64(icon);
+    Text(value, style = [@character-stat-text]);
+}

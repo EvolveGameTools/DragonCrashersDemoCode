@@ -1,0 +1,32 @@
+template Resources {
+
+    Div(style = [@resource-body]) {
+    
+        Banner("Resources", style = [@title-banner]);
+        
+        Div(style = [@resource-content]) {
+            Div(style = [@resource-ebook]);
+            Div(style = [@resources-cta]) {
+                Div(style = [@cta-text-continer]) {
+                    Text("Discover EvolveUI workflows in our new ebook!", style = [@resources-cta-label]);
+                }
+                Button("Get the ebook", attr:green, attr:large);
+            }
+        }
+
+        Separator(attr:decorated, style = [@resource-separator]) {
+            
+            Text("More UI Content from Unity", style = [@separator-label]);
+            
+        }
+        
+        Horizontal(style = [@button-row]) {
+            Button("Manual", attr:large, mouse:click = () => Application.OpenURL("https://evolvegametools.github.io/EvolveUIDocs/docs/templates/template_syntax"));
+            Button("Discord", attr:large, mouse:click = () => Application.OpenURL("https://discord.gg/aqYdNWP385"));
+            Button("Blog", attr:large);
+            Button("Asset Store", attr:large);
+        }
+        
+    }
+
+}

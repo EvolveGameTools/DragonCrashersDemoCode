@@ -1,0 +1,69 @@
+﻿
+template HomeScreen {
+
+    Vertical(style = [@column]) {
+    
+        // track whether we are showing the christmas theme or not
+        state bool isChristmas = false;
+        
+        // clicking the logo toggles the christmas theme 
+        Div(style = [@logo], mouse:click = () => {
+            isChristmas = !isChristmas;
+        });
+        
+        // every frame we set a custom style condition (take a look at the style 'logo' in homescreen.style to see how this works)
+        run $runtime.application.SetStyleCondition("ChristmasTheme", isChristmas);
+        
+        Text("EvolveUI Sample", style = [@logo-text]);
+        
+        // load the chat data. This app loads the real data from resources 
+        // but doesn't actually do anything other than display the first one
+        state ChatSO[] chats = Resources.LoadAll<ChatSO>("GameData/Chat");
+        
+        Div(style = [@chat-log]) {
+            
+            Div(style = [@chat-decoration]);
+            
+            Horizontal(style = [@chat-body]) { 
+            
+                // use rich text to render the name in green 
+                state string message = $"<color green>({chats[0].chatname})</color> {chats[0].message}";
+                
+                Icon32(`icon_Chat_menu`, style = [@chat-icon]);
+                
+                Text(message, allowRichText = true, style = [@chat-text]);
+                
+            }
+            
+            Div(style = [@chat-decoration]);
+            
+        }
+        
+    }
+    
+    Group(style = [@level-select-stack]) {
+        
+        Group(style = [@level-cutout]) {
+        
+            Div(style = [@level-bg]);
+            
+            Group(style = [@level-cta]) {
+            
+                Text("The Dragon's Lair", style = [@level-text]);
+                
+                Button("Play", attr:large);
+                
+            }
+        }
+        
+        Group(style = [@level-select]) {
+        
+            Div(style = [@level-title]) {
+                Text("Level 1", style = [@level-text]);
+            }
+            
+        }
+        
+    }
+    
+}

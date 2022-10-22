@@ -1,0 +1,9 @@
+﻿typography BannerLabel;
+
+element Banner {
+    implicit string label;
+}
+
+template Banner : element Banner {
+   BannerLabel(label);
+}

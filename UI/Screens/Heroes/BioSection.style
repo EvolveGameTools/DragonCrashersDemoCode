@@ -1,0 +1,18 @@
+﻿style <BioSection> {
+    PreferredSize = 1s;
+}
+
+style bio-title {
+    MarginHorizontal = 1s;
+    TextFontSize = 32px;
+    TextColor = @labelColorDark;
+}
+
+style bio-content {
+    PreferredWidth = 1s;
+    TextFontSize = 24px;
+}
+
+style bio-scroll {
+    Padding = 12px;
+}

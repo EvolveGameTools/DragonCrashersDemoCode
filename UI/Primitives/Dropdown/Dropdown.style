@@ -1,0 +1,79 @@
+﻿style <Dropdown> {
+    MinWidth = 200px;
+    MaxWidth = 400px;
+    PreferredWidth = 1strcnt;
+    PreferredHeight = 54px;
+    OutlineWidth = 1px;
+    OutlineColor = #915200;
+    CornerRadius = 4px;
+    PaddingLeft = 8px;
+    SpaceBetweenHorizontal = 1s;
+    LayoutType = Horizontal;
+    Cursor = "Pointer";
+}
+
+style dropdown-button {
+    PreferredWidth = 51px;
+    AspectRatio = ImageAspect;
+    MarginLeft = 4px;
+    BackgroundFit = ScaleToFit;
+    BackgroundImage = "bt_03";
+}
+
+style dropdown-option-list {
+    BackgroundColor = white;
+    LayoutBehavior = Ignored;
+    AlignmentBoundary = Screen;
+    AlignmentTarget = Parent;
+    AlignmentOriginY = 1.1ph;
+    CornerRadius = 8px;
+    PreferredWidth = 2strcnt;
+    OutlineWidth = 1px;
+    OutlineColor = black;
+    PaddingTop = 6px;
+    PaddingBottom = 6px;
+    CollapseSpaceHorizontal = CollapseInner;
+    Layer = 10;
+    Cursor = "Pointer";
+}
+
+style dropdown-selection {
+     MinWidth = 100px;
+     MaxWidth = 180px;
+     PaddingRight = 8px;
+     ClipBounds = ContentBox;
+     PaddingVertical = 1s;
+     Overflow = Hidden;
+}
+
+style <DropdownOptionRow> {
+    PreferredSize = 1strcnt 1cnt;
+    PaddingLeft = 16px;
+    PaddingRight = 16px;
+    PaddingTop = 2px;
+    PaddingBottom = 2px;
+    [hover] {
+        BackgroundColor = #01547c;
+    }
+}
+
+style <DropdownLabel> {
+    
+    TextTransform = UpperCase;
+    TextFontSize = 32px;
+    TextFaceDilate = 0.1f;
+    TextColor = @labelColorDark;
+    TextOverflow = Ellipsis;
+    
+    [attr:selection] {
+        PaddingTop = 5px;
+    }
+    
+    // if the parent is a DropdownOptionRow and that parent is hovered, changed the text color 
+    [when parent-tag(DropdownOptionRow)] {
+        [hover:parent] {
+            TextColor = white;
+        } 
+    }
+    
+}

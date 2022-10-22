@@ -1,0 +1,71 @@
+﻿
+template SkillSection {
+    
+    state int selectedSkill = 0;
+    state IconService iconService = $runtime.GetService<IconService>();
+    state GameData gameData = $runtime.GetService<GameData>();
+
+    CharacterBaseSO character = gameData.CurrentCharacter;
+
+    // define some local functions to handle cycling through the skills         
+    void Increment() {
+        selectedSkill++;
+        if(selectedSkill > 2) {
+            selectedSkill = 0;
+        }    
+    }
+    
+    void Decrement() {
+        selectedSkill--;
+        if(selectedSkill < 0) {
+            selectedSkill = 2;
+        }    
+    }
+    
+    // This toggle group could have been a decorator like the other @ToggleGroup usages 
+    // but I wanted to show that the same behavior can be achieved using templates as well. 
+    ToggleGroup(sync:selectedIndex = selectedSkill, style = [@skill-selection]) [selectedElement] { 
+                
+        // decorators can also be applied directly to an element at it's usage site like this
+        // it doesn't have to be done at the template/container definition site.                 
+        @ToggleControl Icon(iconService.GetIcon(character.skill1.iconPath), size = `150px`);
+        @ToggleControl Icon(iconService.GetIcon(character.skill2.iconPath), size = `150px`);
+        @ToggleControl Icon(iconService.GetIcon(character.skill3.iconPath), size = `150px`);
+        
+        element indicator = Div(style = [@skill-selection-indicator]);
+        run indicator.style.SetAlignmentOffsetX(selectedElement.GetLayoutLocalPosition().x);       
+    
+    }
+    
+    // get a per-frame local variable referencing the selected skill
+    SkillSO activeSkill = character.GetSkill(selectedSkill);
+    
+    Div(style = [@skill-seperator]);
+    
+    Vertical(style = [@skill-info-labels]) {
+        Text(activeSkill.skillName, style = [@skill-name]);
+        Text($"{activeSkill.category} attack", style = [@skill-type]);
+    }
+    
+    // show the skill level and description as well as the next/prev skill buttons 
+    Horizontal(style = [@skill-section]) {
+        
+        CharaterNavButton(mouse:click = () => Decrement());
+        
+        Div(style = [@skill-frame]) {
+            int currentLevel = 3; // temp value for demo, I got lazy here
+            int currentTier = (int)Mathf.Floor(currentLevel / SkillSO.levelsPerTier) + 1;
+            
+            Text($"Tier {currentTier}", style = [@skill-tier-text]);
+
+            string damageText = $"Deals <color #775027>{activeSkill.damagePoints} Damage</color> points to an enemy every <color #775027>{activeSkill.damageTime} seconds</color>";
+
+            Text(damageText, allowRichText = true, style = [@skill-desc-text]);
+        } 
+                    
+        CharaterNavButton(mouse:click = () => Increment());
+                    
+    }      
+    
+    Text("Next tier at Level 5", style = [@skill-next-tier]);
+}

@@ -1,0 +1,38 @@
+﻿
+style <GearSlot> {
+    
+    [when nth-child(1)] {
+        MarginLeft = 1s;                                   
+    }
+    
+    [when nth-child(2)] {
+        MarginTop = 1s;                                   
+    }
+    
+    [when nth-child(3)] {
+        MarginLeft = 1s;                                   
+        MarginTop = 1s;                                   
+    }
+    
+}
+
+style empty-gear-slot {
+    PreferredSize = 143px;
+    CornerRadius = 20px;
+    BackgroundImage = "bg_empty_gear_slot";
+    Padding = 1s;    
+    BackgroundColor = opacity(black, 40%);
+    [hover] {
+        BackgroundColor = opacity(black, 70%);
+    }
+}
+
+style empty-gear-slot-inner {
+    BackgroundImage = "icon_add";
+    PreferredSize = 1s;
+    BackgroundFit = ScaleToFit;
+}
+
+style filled-gear-slot {
+     PreferredSize = 143px;
+}

@@ -1,0 +1,20 @@
+﻿@EntryPoint // Make sure this layer gets compiled in because nothing references it explicitly
+template Overlay {
+    
+    // render the overlay portal, this is how we draw the inventory modal 
+    render portal("Overlay");
+    
+    state ToastService toastService = $runtime.GetService<ToastService>();
+    
+    // show each toast message, the keyFn argument here makes sure that we always assicate
+    // the correct toast item with the correct element every frame. Because the toast list
+    // can be sorted or have removals, this ensures we always render the right element with 
+    // the right data. This would not be needed if the toastMessages list were not mutated
+    // per-frame during template execution. 
+    foreach(toast in toastService.toastMessages, keyFn = (t) => t.id) {
+        ToastMessage(toast);   
+    }
+    
+}
+
+

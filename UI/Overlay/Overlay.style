@@ -1,0 +1,7 @@
+
+style <Overlay> {
+    PointerEvents = None;
+    PreferredSize = 1vw 1vh;
+    Padding = 1s;
+    PaddingTop = 2s;
+}

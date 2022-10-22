@@ -1,0 +1,13 @@
+
+style <ToastMessage> {
+    BackgroundImage = "Frame_03";
+    Padding = 16px;
+    BackgroundColor = opacity(black, 60%);
+    CornerRadius = 16px;
+    Margin = 16px;
+}
+
+style toast-label {
+    TextFontSize = 50px;
+    TextColor = white;
+}

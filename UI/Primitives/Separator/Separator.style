@@ -1,0 +1,12 @@
+﻿style <Separator> {
+    BackgroundImage = "Separator_01";
+    BackgroundTint = @labelColorDark;
+    PreferredWidth = 1s;
+    PreferredHeight = 3px;
+    MarginVertical = 4px;
+    
+    [attr:decorated] {
+        BackgroundImage = "Separator_03";
+        PreferredHeight = 20px;
+    }
+}

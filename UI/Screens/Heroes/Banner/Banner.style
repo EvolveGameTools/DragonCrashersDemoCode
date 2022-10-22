@@ -1,0 +1,9 @@
+﻿style <Banner> {
+    BackgroundImage = "Header_bg_01";
+    Padding = 1s;
+}
+
+style <BannerLabel> {
+    TextColor = white;
+    TextFontSize = 63px;
+}

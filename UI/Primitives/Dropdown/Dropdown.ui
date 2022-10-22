@@ -1,0 +1,67 @@
+﻿
+container DropdownOptionRow();
+typography DropdownLabel();
+
+// this is the only usage of a generically typed element in this app. We forward the T type to backing C# type
+template Dropdown<T> : Dropdown<T> {
+
+    // we don't use this slot in this particular app but we could override this slot to show a custom placeholder
+    define slot placeholder(string placeholder) {
+        DropdownLabel(placeholder, attr:selection, attr:placeholder);
+    }
+
+    // override this to show custom content when displaying the selected option
+    define slot selection(Option<T> selectedOption) {
+        DropdownLabel(selectedOption.label, attr:selection);
+    }
+
+    // override this to show custom content when displaying each option in the dropdown list 
+    define slot option(Option<T> option) {
+        DropdownLabel(option.label);
+    }
+
+    // decide if we need to show the placeholder or the selected item 
+    Group(style = [@dropdown-selection]) {
+        if(ShowingPlaceholder) {
+            render slot placeholder(placeholder);
+        }
+        else {
+            render slot selection(options[selectedIndex]);
+        }
+    }
+
+    Group(style = [@dropdown-button]);
+
+    // destructive means when this scope is not entered we destroy the contained elements 
+    // instead of just disabling them. This is useful for consuming less memory for rarely 
+    // displayed pieces of UI or for making sure each time we create these element we start
+    // with a blank slate and all previous state was dropped. 
+    if:destructive(isSelecting && options != null && options.Count != 0) {
+
+        // in order to handle closing the option list if the player clicks anywhere outside of the open option list
+        // we need to track if the mouse is over the option list or not. To do this we emit a marker around the elemements
+        // of our option list. We'll later check to see any element inside this marker had a mouse down event this frame.  
+        marker mouseCheck {
+            
+            Group(style = [@dropdown-option-list]) {
+            
+                // for each option we render the option slot 
+                foreach (option in options.list) [index] {
+                    DropdownOptionRow(mouse:click = SelectItem(index)) {
+                        render slot option(option);
+                    }
+                }
+                
+            }
+            
+        }
+
+        // if our dropdown option list is open and we had a mouse down event this frame and none of the elements
+        // inside the 'mouseCheck' marker had a mouse down event this frame, then we exit the selection state
+        run {
+            if (isSelecting && $runtime.IsMouseDown && !$runtime.MouseDown(mouseCheck)) {
+                isSelecting = false;
+            }
+        }
+    }
+}

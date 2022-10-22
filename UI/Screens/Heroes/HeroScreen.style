@@ -1,0 +1,172 @@
+
+style <HeroScreen> {
+    PreferredSize = 1s;
+    LayoutType = Horizontal;
+    Padding = 32px;
+    SpaceBetweenHorizontal = 64px;
+}
+ 
+style character-gear-container {
+    PreferredSize = 1s;
+    PaddingLeft = 48px;
+}
+
+style character-data-container {
+    PreferredSize = 634px 691px;
+    MarginVertical = 1s;
+}
+
+style gear-container {
+    PreferredSize = 1s 2s;
+    SpaceBetween = 1s;
+    LayoutType = Stack;
+}
+
+style power-row {
+    Padding = 1s;
+    SpaceBetweenHorizontal = 24px;
+}
+
+style power-text {
+    TextColor = white;
+    TextFontSize = 82px;
+}
+
+style power-icon {
+    BackgroundImage = "icon_power";
+    PreferredSize = 75px;
+    BackgroundFit = ScaleToFit;
+}
+
+style <CharaterNavButton> {
+    BackgroundImage = "bt_07";
+    PreferredWidth = 32px;
+    AspectRatio = ImageAspect;
+    [when last-child] {
+        BackgroundImageRotation = 180deg;
+    }
+    
+    [attr:large] {
+        PreferredWidth = 64px;
+    }
+    
+    mixin(button-01-anim);
+    
+}
+
+style <HeroGearRow> {
+    PreferredWidth = 1s;
+    LayoutType = Horizontal;
+    SpaceBetweenHorizontal = 1s;
+}
+
+style hero-gear-area {
+    SpaceBetweenVertical = 1s;
+    PreferredSize = 1s 410px;
+    MarginBottom = 1s;
+    MarginTop = 32px;
+}
+
+style hero-button-row {
+    MarginTop = 1s;
+    PaddingTop = 1s;
+    PaddingHorizontal = 2s;
+    PreferredWidth = 1s;
+    SpaceBetweenHorizontal = 1s;
+}
+
+style potion-row {
+    BackgroundColor = opacity(black, 60%);
+    CornerRadius = 18px;
+    PreferredSize = 365px 186px;
+    SpaceBetweenVertical = 1s;
+    Padding = 4px;
+}
+
+style xp-row {
+    Padding = 1s;
+    SpaceBetweenHorizontal = 1s;
+    PreferredWidth = 1s;
+}
+
+style character-panel-frame {
+    BackgroundImage = "Window_bg_02";
+    PreferredSize = 1s;
+}
+
+style <CharacterTab> {
+    
+    [attr:selected] {
+        BackgroundImage = "tab_window_02_selected";
+    }
+    
+    BackgroundImage = "tab_window_02_unselected";
+    PreferredHeight = 1bh;
+    PreferredWidth = 1s;
+    Padding = 1s;
+}
+
+style character-tabs {
+    Padding = 12px 16px ;
+    LayoutType = Horizontal;
+    PreferredWidth = 1s;
+}
+
+style <CharacterTabLabel> {
+    TextFontSize = 42px;
+    TextColor = @labelColorDark;
+}
+
+style badge-list {
+    PreferredWidth = 1s;
+    PaddingHorizontal = 1s;
+    SpaceBetweenHorizontal = 1s;
+    MarginBottom = 1s;
+}
+
+style tab-content {
+    PreferredSize = 1s;
+    PaddingHorizontal = 32px;
+    MarginBottom = 48px;
+}
+
+style level-label {
+    MarginHorizontal = 1s;
+
+    TextFontSize = 80px;
+    TextColor = @labelColorDark;
+}
+
+style stat-frame {
+    BackgroundImage = "Frame_03";
+    PreferredSize = 1s 260px;
+    LayoutType = GridHorizontal;
+    GridMainAxisTemplate = 4s 4s;
+    PaddingHorizontal = 1s;
+    MarginHorizontal = 32px;
+    PaddingVertical = 1s;
+    SpaceBetweenHorizontal = 32px;
+    SpaceBetweenVertical = 1s;
+    MarginBottom = 1s;
+}
+
+style character-name-banner {
+    PreferredSize = 596px 106px;
+}
+
+style xp-icon {
+    BackgroundImage = "icon_xp";
+    PreferredWidth = 86px;
+    AspectRatio = ImageAspect;
+}
+
+style xp-text {
+    TextFontSize = 69px;
+    TextColor = white;
+    TextOutlineColor = black;
+    TextOutlineWidth = 0.05;
+}
+
+style xp-button {
+    PreferredWidth = 1s;
+}

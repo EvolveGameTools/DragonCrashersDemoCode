@@ -1,0 +1,72 @@
+using UI;
+using EvolveUI.BasicElements;
+
+// this is the entry point of our game's UI 
+template App {
+
+    // save a reference to the game data object, this will be used to store some of the routing information for the ui
+    state GameData gameData = $runtime.GetServiceOrDefault<GameData>();
+
+    // setup some application data the first time this template gets rendered     
+    create {
+        
+        // create the app-wide services 
+        $runtime.GetServiceOrDefault<ToastService>(); 
+        $runtime.GetServiceOrDefault<IconService>();
+        
+        // create a view to act as an overlay, this is where we'll put modals, 
+        // tooltips, and other things that should live on a higher layer
+        $runtime.CreateOverlayView("DragonCrashers", "Overlay", new Rect(), null).SetFullScreen(true);
+        
+        // override the default scroll bar styles
+        ScrollViewUIService scrollService = $runtime.GetServiceOrDefault<ScrollViewUIService>();
+        // styles can be referenced with the @ operator. Referencing a missing style is a compile error
+        // the scroll styles are defined in App.style
+        scrollService.verticalTrackStyle = @scroll-track-vertical; 
+        scrollService.verticalHandleStyle = @scroll-handle-vertical;
+        
+    }
+        
+    // make a full screen element, Horizontal has a style that looks for the `stretch` attribute
+    // so by providing this attribute we opt into a different set of style properties
+    Horizontal(attr:stretch) {
+        
+        // render the side menu for app navigation
+        SideMenu();
+
+        // render the top bar to show currency and settings                                                                                                                                                                 
+        TopBar();
+      
+        // just like C# we can use a switch statement to select which case to render 
+        // in this case we switch over an enum, but this could be any type supported by C#
+        switch(gameData.currentScreen) { 
+            
+            case ScreenId.Home {
+                HomeScreen();
+            }
+            
+            case ScreenId.Heroes {
+                HeroScreen();
+            }
+            
+            case ScreenId.Resources {
+                Resources();
+            }
+            
+            // The shop screen is not implemented yet
+            case ScreenId.Shop {
+                Text("Shop");
+            }
+            
+            // The mail screen is not implemented yet
+            case ScreenId.Mail {
+                Text("Mail");
+            }
+            
+        }
+              
+    }
+    
+}
+
+

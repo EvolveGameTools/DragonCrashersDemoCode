@@ -1,0 +1,56 @@
+﻿
+style <Button> {
+    
+    Padding = 18px 64px;
+    Cursor = "Pointer";
+
+    // by default we show the orange button     
+    BackgroundImage = "bt_08";
+    
+    // primary buttons get bigger paddings 
+    [attr:primary] {
+        Padding = 24px 1s;
+    }
+    
+    [attr:grey] {
+        BackgroundImage = "bt_09";
+        set buttonTint = red; // set a style variable for the tint 
+    }
+    
+    [attr:green] {
+        BackgroundImage = "bt_10";
+        set buttonTint = green;
+    }
+
+    [attr:blue] {
+        BackgroundImage = "bt_11";
+    }
+    
+    [attr:red] {
+        BackgroundImage = "bt_12";
+    }     
+    
+    transition spring(stiff) = RenderTransform;
+    
+    [hover] {
+        RenderTransform = Scale(1.1);
+        BackgroundTint = var(buttonTint, @tint);
+    }
+    
+}
+
+style button-text {
+    TextFontSize = 34px;
+
+    // when the parent is marked as 'large' or 'primary' we need to bump up the font size 
+    [when parent attr:large] {
+        TextFontSize = 48px;
+    }
+    
+    [when parent attr:primary] {
+        TextFontSize = 48px;
+    }
+    
+    TextColor = white;
+    MarginBottom = 4px;
+}

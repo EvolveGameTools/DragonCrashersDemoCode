@@ -1,0 +1,15 @@
+﻿template BioSection {
+
+    state GameData gameData = $runtime.GetService<GameData>();
+    CharacterBaseSO character = gameData.CurrentCharacter;
+    
+    Text(character.bioTitle, style = [@bio-title]);
+    
+    Separator();
+    
+    ScrollView(style = [@bio-scroll]) {
+        Text(character.bio, style = [@bio-content]);
+    }
+    
+}
+

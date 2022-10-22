@@ -1,0 +1,15 @@
+﻿
+element Badge {
+    string label;
+    ImageSource icon;
+}
+
+template Badge : element Badge {
+    
+    Div(style = [@badge-crest]) {
+        Div(style = [@badge-icon], style:BackgroundImage = icon);
+        Text(label, style = [@badge-label]);   
+    }
+    
+    
+}

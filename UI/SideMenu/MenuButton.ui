@@ -1,0 +1,21 @@
+﻿
+// define a primitive for the label. This lets us style the element in a more elegant way
+typography SideMenuLabel;
+
+// define a backing type for the button so we can pass in parameters
+// 'implicit' lets us simplify the expression SideMenuButton(src = someIcon) to SideMenuButton(someIcon)
+// currently only one field can be marked implicit
+element SideMenuButton {
+   implicit ImageSource src;
+   ScreenId screenId;
+}
+
+// this element expects to be part of a toggle group, @ToggleControl opts into this behavior 
+@ToggleControl
+template SideMenuButton : element SideMenuButton(mouse:click = () => $runtime.GetService<GameData>().currentScreen = screenId) {
+    
+    Div(style = [@menu-button], style:BackgroundImage = src);
+    
+    SideMenuLabel(screenId);
+    
+}

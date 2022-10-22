@@ -1,0 +1,9 @@
+﻿element Button {
+    implicit string label;
+}
+
+template Button : element Button {
+    
+    Text(label, style = [@button-text]);
+    
+}

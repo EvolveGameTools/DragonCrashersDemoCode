@@ -1,0 +1,35 @@
+// tile the app background texture 16 times horizontally and 9 times vertically
+style <App> {
+    BackgroundImage = "bg_pattern_01";
+    BackgroundImageScale = 16 9;
+}
+
+// this is a color that is frequently used so store it's value in a named constant
+const labelColorDark = #3a2100; 
+const tint = #F1C40F;
+
+// this is a reusable mixin that applies a nice scale and tint effect on hover 
+mixin button-01-anim {
+    transition spring(stiff) = RenderTransform;
+    
+    [hover] {
+        RenderTransform = Scale(1.1);
+        BackgroundTint = @tint; // apply the tint from the constant value above 
+    }
+   
+}
+
+// these next styles are overrides for the default scroll bar styles 
+style scroll-track-vertical {
+    PreferredWidth = 8px;
+    AlignmentTargetX = Parent;
+    AlignmentDirectionX = End;
+    BackgroundColor = grey;
+    CornerRadius = 50%;
+}
+
+style scroll-handle-vertical {
+    PreferredWidth = 1s;
+    CornerRadius = 50%;
+    BackgroundColor = #a65d00;
+}

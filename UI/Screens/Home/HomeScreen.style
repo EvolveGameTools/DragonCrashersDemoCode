@@ -1,0 +1,130 @@
+﻿style <HomeScreen> {
+    PreferredSize = 1s;
+    BackgroundImage = "HomeScreenBackground";
+    PaddingTop = 48px;
+    PaddingLeft = 1s;
+    PaddingRight = 2s;
+    LayoutType = Horizontal;
+}
+
+style logo {
+    BackgroundImage = "DC_logo";
+    PreferredWidth = 580px;
+    AspectRatio = ImageAspect;
+    
+    [when "ChristmasTheme"] {
+        BackgroundImage = "DC_logo_christmas";
+    }
+    
+    [when "HalloweenTheme"] {
+        BackgroundImage = "DC_logo_halloween";
+    }
+}
+
+style logo-text {
+    TextOutlineColor = black;
+    TextColor = white;
+    TextFontSize = 82px;
+    TextOutlineWidth = 0.5;
+}
+
+style chat-log {
+    MarginTop = 1s;
+    BackgroundImage = "Window_bg_01";
+    Padding = 12px;
+    PreferredWidth = 625px;
+    PreferredHeight = 154px;
+}
+
+style chat-decoration {
+    BackgroundImage = "Separator_01";
+    PreferredSize = 1s 1bh;
+}
+
+style column {
+    PreferredSize = 1cnt 1s;
+    PaddingBottom = 12px;
+    PaddingHorizontal = 1s;
+}
+
+style chat-text {
+    TextColor = white;
+    TextFontSize = 25px;
+    PreferredWidth = 1s;
+    MarginVertical = 8px;
+    MinHeight = 36px;
+}
+
+style chat-body {
+    PreferredSize = 1s 1s;
+    LayoutType = Horizontal;
+}
+
+style chat-icon {
+    BackgroundImage = "icon_Chat_menu";
+    PreferredWidth = 87px;
+    AspectRatio = ImageAspect;
+    Margin = 8px;
+}
+
+style level-select {
+    BackgroundImage = "frame_01";
+    PreferredSize = 1s;
+    PointerEvents = None;
+}
+
+style level-title {
+    MarginHorizontal = 1s;
+    LayoutBehavior = Ignored;
+    AlignmentOffsetY = -30px;
+    BackgroundImage = "Header_bg_02";
+    PreferredSize = 380px 100px;
+    PaddingHorizontal = 1s;
+    PaddingTop = 16px;
+}
+
+style level-text {
+    TextFontSize = 48px;
+    TextColor = white;
+    [attr:small] {
+        TextFontSize = 24px;
+    }
+}
+
+style level-bg {
+    BackgroundImage = "Level_01";
+    PreferredSize = 1s;
+}
+
+style level-select-stack {
+    LayoutBehavior = Ignored;
+    MarginVertical = 1s;
+    AlignmentTargetX = Parent;
+    AlignmentDirection = End;
+    AlignmentOffsetX = 32px;
+    LayoutType = Stack;
+    PreferredSize = 468px 619px;
+       
+}
+
+style level-cutout {
+    PreferredSize = 1s;
+    Margin = 16px;
+    Overflow = Hidden;
+    LayoutType = Stack;
+}
+
+style level-cta {
+    PreferredSize = 1s 200px;
+    PaddingHorizontal = 1s;
+    MarginTop = 1s;
+    Padding = 1s;
+    BackgroundColor = opacity(black, 80%);
+    SpaceBetweenVertical = 8px;
+}
+
+style level-button {
+    BackgroundImage = "bt_08";
+    Padding = 10px 12px 16px 16px;
+    mixin (button-01-anim);
+}

@@ -1,0 +1,18 @@
+﻿
+
+template TopBar {
+    
+    state GameData gameData = $runtime.GetService<GameData>();
+    
+    // render a currency bar for soft currency. when clicked we'll transition the app route to the resources pages
+    CurrencyBar(amount = gameData.softCurrency, icon = `icon_soft_currency`, targetScreen = ScreenId.Resources);
+    
+    // render a currency bar for hard currency. when clicked we'll transition the app route to the shop pages
+    CurrencyBar(amount = gameData.hardCurrency, icon = `icon_hard_currency`, targetScreen = ScreenId.Shop);
+
+    Div(style = [@settings-container]) {
+        Div(style = [@settings-icon]);
+    }
+    
+}
+

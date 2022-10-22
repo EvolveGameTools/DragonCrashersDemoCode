@@ -1,0 +1,26 @@
+﻿style <Badge> {
+    Padding = 1s;
+    PreferredHeight = 140px;
+}
+
+style badge-crest {
+    BackgroundImage = "type_crest_bg";
+    PreferredSize = 101px;
+    Padding = 1s;
+    MarginBottom = 32px;
+}
+
+style badge-label {
+    TextColor = @labelColorDark; 
+    TextFontSize = 38px;
+    LayoutBehavior = Ignored;
+    AlignmentTarget = Parent;
+    AlignmentOffsetX = -0.5w;
+    AlignmentOriginX = 0.5pw;
+    AlignmentDirectionY = End;
+    AlignmentOffsetY = -40px;
+}
+
+style badge-icon {
+    PreferredSize = 72px;
+}

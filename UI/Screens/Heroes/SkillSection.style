@@ -1,0 +1,74 @@
+﻿style <SkillSection> {
+    PreferredSize = 1s;
+}
+
+style skill-selection-indicator {
+    BackgroundImage = "Frame_skill_selected";
+    PreferredWidth = 150px;
+    AspectRatio = ImageAspect;
+    LayoutBehavior = Ignored;
+    ZIndex = 1;
+    transition spring(stiff) = AlignmentOffsetX;
+}
+
+style skill-selection {
+    LayoutType = Horizontal;
+    PreferredWidth = 1s;
+    Margin= 16px;
+    SpaceBetweenHorizontal = 1s;
+}
+
+style skill-frame {
+    BackgroundImage = "Frame_02";
+    PreferredSize = 1s 146px;
+    MarginVertical = 1s;
+}
+
+style skill-info-labels {
+    PreferredWidth = 1s;
+    Padding = 1s;
+}
+
+style skill-section {
+    PreferredWidth = 1s;
+    PaddingVertical = 1s;
+    SpaceBetweenHorizontal = 16px;
+}
+
+style skill-seperator {
+    BackgroundImage = "Separator_02";
+    PreferredWidth = 1s;
+    PreferredHeight = 5px;
+    MarginVertical = 4px;
+}
+
+style skill-tier-text {
+    TextFontSize = 40px;
+    MarginHorizontal = 1s;
+    MarginVertical = 16px 8px;
+    TextColor = #d0d0d0;
+}
+
+style skill-desc-text {
+    PreferredWidth = 1s;
+    TextFontSize = 27px;
+    MarginHorizontal = 12px;
+}
+
+style skill-name {
+    TextColor = @labelColorDark;
+    TextFontSize = 60px;
+}
+
+style skill-type {
+     TextColor = #343232;
+     TextFontSize = 40px;
+     MarginBottom = 8px;
+ }
+
+style skill-next-tier {
+    MarginHorizontal = 1s;
+    TextColor = @labelColorDark;
+    MarginTop = 12px;
+    TextFontSize = 35px;
+}

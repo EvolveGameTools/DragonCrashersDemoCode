@@ -1,0 +1,68 @@
+﻿style <SideMenu> {
+    PreferredSize = 184px 1s;
+    BackgroundImage = "Main_menu_bg";
+    ZIndex = 2;
+}
+
+style menu-button {
+    BackgroundImage = "Main_menu_icon_01";
+    PreferredSize = 1bw 1bh;
+    MarginHorizontal = 1s;
+}
+
+style <SideMenuButton> {
+    
+    [hover] {
+        BackgroundTint = #FFCD19;
+    }
+    
+    [attr:selected] {
+        BackgroundTint = #FFCD19;
+        PreferredWidth = 200px;
+    }
+    
+    Padding = 1s;
+    BackgroundImage = "Main_menu_button_01";
+    PreferredSize = 1s 1s;
+}
+
+style <SideMenuLabel> {
+    TextColor = #FDEED5;
+    TextFontSize = 0;
+    transition CubicEaseIn 300ms = TextFontSize;
+    
+    [when parent attr:selected] {
+        TextFontSize = 36px;
+    }
+    
+}
+
+style avatar {
+    PreferredSize = 156px 1s;
+}
+
+style avatar-frame {
+    BackgroundImage = "XP_Hud_frame";
+    PreferredWidth = 240px;
+    AspectRatio = ImageAspect;
+    MarginLeft = 24px;
+    MarginTop = 16px;
+    LayoutBehavior = Ignored;
+}
+
+style avatar-bg {
+    mixin (avatar-frame);
+    BackgroundImage = "XP_Hud_bg";
+}
+
+style button-group {
+    PreferredSize = 1s 3s;
+}
+
+style selected-runner {
+    BackgroundImage = "Main_menu_selector";
+    PreferredWidth = 1bw;
+    PreferredHeight = 20%;
+    LayoutBehavior = Ignored;
+    transition spring(default) = MarginTop;
+}

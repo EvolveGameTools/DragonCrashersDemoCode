@@ -1,0 +1,28 @@
+﻿
+
+style <CurrencyBar> {
+    PreferredSize = 255px 67px;
+    LayoutType = Horizontal;
+    CornerRadius = 12px;
+    PaddingVertical = 1s;
+    BackgroundColor = opacity(black, 60%);
+}
+
+style <CurrencyText> {
+    TextFontSize = 50px;
+    TextColor = white;
+    MarginLeft = 1s;
+    MarginRight = 8px;
+}
+
+style add-currency {
+    MarginTop = 8px;
+    MarginRight = 4px;
+    BackgroundImage = "bt_01";
+    PreferredSize = 53px 62px;
+    mixin (button-01-anim); // mixin an animation for a nice hover effect
+}
+
+style currency-icon {
+    PreferredSize = 75px;
+}
